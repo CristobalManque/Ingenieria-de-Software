@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block item %}
+<li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{{ url_for('auth.login') }}">Iniciar sesión</a> 
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Registrarse</a>
+  </li>
+{% endblock item %}
+
+{% block body %}
+    <h1>Pagina secundaria</h1>
+{% endblock  %}
