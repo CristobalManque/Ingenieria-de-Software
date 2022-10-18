@@ -1,0 +1,6 @@
+DROP TABLE IF EXISTS example;
+
+CREATE TABLE example(
+    id INTEGER PRIMARY KEY
+);
+
