@@ -10,5 +10,50 @@
 {% endblock item %}
 
 {% block body %}
-    <h1>Pagina secundaria</h1>
+    <div class="signupFrm">
+      <form action="" class="form">
+        <h1 class="title">Formulario de Registro</h1>
+  
+        <div class="inputContainer">
+          <input type="text" class="input" placeholder="">
+          <label for="" class="label">Nombre de usuario(Obligatorio)</label>
+        </div>
+
+        <div class="inputContainer">
+          <input type="text" class="input" placeholder="">
+          <label for="" class="label">Direccion</label>
+        </div>
+
+        <div class="inputContainer">
+          <input type="number" class="input" placeholder="">
+          <label for="" class="label">Telefono</label>
+        </div>
+
+        <div class="inputContainer">
+          <input type="text" class="input" placeholder="">
+          <label for="" class="label">Email</label>
+        </div>
+  
+  
+        <div class="inputContainer">
+          <input type="text" class="input" placeholder="">
+          <label for="" class="label">Contraseña</label>
+        </div>
+  
+        <div class="inputContainer">
+          <input type="text" class="input" placeholder="">
+          <label for="" class="label">Confirma Contraseña</label>
+        </div>
+        
+        <div class="inputContainer">
+        <input type="radio" id="cliente" name="tipe_account" value="cliente">
+        <label for="cliente">Cliente</label><br>
+
+        <div class="inputContainer">
+          <input type="radio" id="proovedor" name="tipe_account" value="proovedor">
+          <label for="proovedor">Proovedor</label><br>
+
+        <input type="submit" class="submitBtn" value="Registrarse">
+      </form>
+    </div>
 {% endblock  %}
