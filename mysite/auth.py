@@ -1,5 +1,7 @@
 import functools
+import re
 from flask import (Blueprint, flash, g, redirect, render_template, request, session, url_for)
+from pkg_resources import require
 from mysite.db import get_db
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -8,25 +10,35 @@ bp = Blueprint('auth', __name__, url_prefix='/auth')
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        nombre = request.form['nombre']
+        direccion = request.form['direccion']
+        telefono = request.form['telefono']
+        correo = request.form['correo']
+        clave = request.form['clave']
+        tipo = request.form['tipo']
         db = get_db()
         error = None
 
-        if not username:
-            error = 'Username is required.'
-        elif not password:
-            error = 'Password is required.'
-
+        if not nombre:
+            error = 'nombre is required.'
+        elif not direccion:
+            error ='direccion is required.'
+        elif not telefono:
+            error ='telefono is required.'
+        elif not correo:
+            error ='correo is required.'
+        elif not clave:
+            error = 'clave is required.'
+        elif not tipo:
+            error = 'Tipo is required.'
         if error is None:
             try:
                 db.execute(
-                    "INSERT INTO user (username, password) VALUES (?, ?)",
-                    (username, generate_password_hash(password)),
-                )
+                    "INSERT INTO usuario (nombre, direccion, telefono, correo, clave, tipo) VALUES (?, ?, ?, ?, ?, ?)",
+                    (nombre,direccion,telefono,correo, generate_password_hash(clave),tipo))
                 db.commit()
             except db.IntegrityError:
-                error = f"User {username} is already registered."
+                error = f"User {correo} is already registered."
             else:
                 return redirect(url_for("auth.login"))
 

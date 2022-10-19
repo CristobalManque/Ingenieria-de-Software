@@ -11,42 +11,43 @@
 
 {% block body %}
     <div class="container d-flex align-items-center justify-content-center">
-      <form action="" class="form">
+      <form method="post">
         <h1 class="fw-bold text-center py-5">Formulario de Registro</h1>
   
         <div class="mb-4">
-          <input type="text" class="form-control" placeholder="">
-          <label for="" class="form-label">Nombre de usuario (Obligatorio)</label>
+          <label for="nombre" class="form-label">Nombre de usuario (Obligatorio)</label>
+          <input type="nombre" class="form-control" name="nombre">
         </div>
 
         <div class="mb-4">
-          <input type="text" class="form-control" placeholder="">
-          <label for="" class="label">Direccion</label>
+          <label for="direccion" class="label">Direccion</label>
+          <input type="direccion" class="form-control" name = "direccion">
+
         </div>
 
         <div class="mb-4">
-          <input type="number" class="form-control" placeholder="">
-          <label for="" class="form-label">Telefono</label>
+          <label for="telefono" class="form-label">Telefono</label>
+          <input type="telefono" class="form-control" name ="telefono">
         </div>
 
         <div class="mb-4">
-          <input type="text" class="form-control" placeholder="">
-          <label for="" class="form-label">Email</label>
+          <label for="correo" class="form-label">Email</label>
+          <input type="correo" class="form-control" name ="correo">
         </div>
   
   
         <div class="mb-4">
-          <input type="text" class="form-control" placeholder="">
-          <label for="" class="form-label">Contraseña</label>
+          <label for="clave" class="form-label">Contraseña</label>
+          <input type="password" class="form-control" name ="clave">
         </div>
 
         <div class="mb-4">
-        <input type="radio" id="cliente" name="tipe_account" value="cliente">
+        <input type="radio" id="cliente" name="tipo" value="cliente">
         <label for="cliente">Cliente</label><br>
 
         <div class="mb-4">
-          <input type="radio" id="proovedor" name="tipe_account" value="proovedor">
-          <label for="proovedor">Proovedor</label><br>
+          <input type="radio" id="proveedor" name="tipo" value="proveedor">
+          <label for="proveedor">Proveedor</label><br>
 
         <input type="submit" class="btn btn-primary" value="Registrarse">
       </form>
