@@ -26,9 +26,9 @@ def create_app(test_config = None):
     except OSError:
         pass
     
-    # Pagina que retorna "Hola mundo"
+    # Pagina que retorna "pagina principal"
     @app.route("/")
-    def hola_mundo():
-        return "Hola mundo"
+    def pagina_principal():
+        return "Pagina Principal sitio web"
     
     return app
