@@ -49,17 +49,17 @@ def register():
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        correo = request.form['correo']
+        clave = request.form['clave']
         db = get_db()
         error = None
         user = db.execute(
-            'SELECT * FROM user WHERE username = ?', (username,)
+            'SELECT * FROM usuario WHERE correo = ?', (correo,)
         ).fetchone()
 
         if user is None:
-            error = 'Incorrect username.'
-        elif not check_password_hash(user['password'], password):
+            error = 'Incorrect correo.'
+        elif not check_password_hash(user['clave'], clave):
             error = 'Incorrect password.'
 
         if error is None:
