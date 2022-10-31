@@ -1,6 +1,6 @@
 import os
 from flask import Flask
-from . import db, auth
+from . import db, auth, views
 
 def create_app(test_config = None):
     
@@ -15,6 +15,7 @@ def create_app(test_config = None):
 
     db.init_app(app)
     app.register_blueprint(auth.bp)
+    app.register_blueprint(views.bp)
     
     if test_config is None:
         app.config.from_pyfile('config.py', silent=True)
@@ -25,10 +26,5 @@ def create_app(test_config = None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
-    
-    # Pagina que retorna "pagina principal"
-    @app.route("/")
-    def pagina_principal():
-        return "Pagina Principal sitio web"
     
     return app

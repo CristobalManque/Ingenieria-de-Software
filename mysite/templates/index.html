@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block item %}
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{{ url_for('auth.logout') }}">Cerrar sesión</a>
+  </li>
+{% endblock %}
+
+{% block body %}
+    <h1>Ingresado</h1>
+{% endblock %}
