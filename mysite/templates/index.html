@@ -1,11 +1,43 @@
 {% extends 'base.html' %}
 
-{% block item %}
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="{{ url_for('auth.logout') }}">Cerrar sesión</a>
-  </li>
-{% endblock %}
+{% block item2 %}
+{% if g.user %}
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> {{ g.user['nombre'] }} </a>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+      <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">Cerrar sesión</a></li>
+  </ul>
+</li>
+{% endif %}
+{% endblock item2 %}
 
 {% block body %}
-    <h1>Ingresado</h1>
+    {% if g.user %}
+      {% if g.user['tipo'] == "cliente" %}
+      <br>
+      <div class="container">
+        <a href="#" class="btn btn-primary col-sm-1">Nuevo</a>
+        <a href="#" class="btn btn-primary col-sm-1 disabled">Editar</a>
+      </div><br>
+      <div class="container">
+        <div class="card text-center mx-auto">
+          <h5 style="text-align: center;">No hay datos disponibles</h5>
+        </div>
+
+      </div>
+      
+      {% elif g.user['tipo'] == "proveedor" %}
+      <br>
+      <div class="container">
+        <a href="#" class="btn btn-primary col-sm-1">Nuevo</a>
+        <a href="#" class="btn btn-primary col-sm-1 disabled">Editar</a>
+      </div><br>
+      <div class="container">
+        <div class="card text-center mx-auto">
+          <h5 style="text-align: center;">No hay datos disponibles</h5>
+        </div>
+
+      </div>
+      {% endif %}
+    {% endif %}
 {% endblock %}
