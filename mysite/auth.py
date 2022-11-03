@@ -56,16 +56,16 @@ def login():
         ).fetchone()
 
         if user is None:
-            error = 'Incorrect correo.'
+            error = 'Correo incorrecto.'
         elif not check_password_hash(user['clave'], clave):
-            error = 'Incorrect password.'
+            error = 'Clave incorrecta.'
 
         if error is None:
             session.clear()
             session['user_id'] = user['id']
             return redirect(url_for('index.index'))
-
-        flash(error)
+        else:
+            return render_template('auth/login.html', err = error)
 
     return render_template('auth/login.html')
 
