@@ -18,17 +18,18 @@ def register():
         error = None
 
         if not nombre:
-            error = 'nombre is required.'
+            error = 'El nombre es requerido.'
         elif not direccion:
-            error ='direccion is required.'
+            error ='La dirección es requerida.'
         elif not telefono:
-            error ='telefono is required.'
+            error ='El teléfono es requerido.'
         elif not correo:
-            error ='correo is required.'
+            error ='El correo es requerido.'
         elif not clave:
-            error = 'clave is required.'
+            error = 'La clave es requerida.'
         elif not tipo:
-            error = 'Tipo is required.'
+            error = 'El tipo es requerido.'
+
         if error is None:
             try:
                 db.execute(
@@ -36,11 +37,10 @@ def register():
                     (nombre,direccion,telefono,correo, generate_password_hash(clave),tipo))
                 db.commit()
             except db.IntegrityError:
-                error = f"User {correo} is already registered."
+                error = "El correo ya se encuentra registrado."
+                return render_template('auth/register.html', err = error)
             else:
                 return redirect(url_for("auth.login"))
-
-        flash(error)
         
     return render_template('auth/register.html')
 
