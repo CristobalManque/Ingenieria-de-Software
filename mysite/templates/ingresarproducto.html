@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block item %}
+<!-- <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{{ url_for('vista.inicio') }}">Inicio</a>
+</li> -->
+{% endblock item %}
+
+{% block item2 %}
+{% if g.user %}
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> {{ g.user['nombre'] }} </a>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+      <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">Cerrar sesión</a></li>
+  </ul>
+</li>
+{% endif %}
+{% endblock item2 %}
+
+{% block body %}
+    {% if g.user['tipo'] == "cliente" %}
+      <br>
+      <div class="container">
+        <a href="{{ url_for('vista.inicio') }}" class="btn btn-primary col-sm-1">Volver</a>
+      </div><br>
+      <div class="container">
+        {% if error %}
+        <div class="mb-1">
+          <div class="alert alert-danger" role="alert">
+              <p>{{ error }}</p>
+          </div>
+        </div>
+        {% endif %}
+        <div class="card text-center mx-auto">
+          <h5 style="text-align: center;">Ingresar producto</h5>
+          <form method="post">
+            <div class="mb-4">
+                <label for="sku" class="form-label">SKU</label>
+                <input type="text" name="sku" class="form-control" required>
+            </div>
+            <div class="mb-4">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input type="text" name="nombre" class="form-control" required>
+            </div>
+            <div class="mb-4">
+                <label for="fecha" class="form-label">Fecha de entrega</label>
+                <input type="datetime-local" name="fecha" class="form-control" required>
+            </div>
+            <div class="mb-4">
+              <label for="cantidad" class="form-label">Cantidad</label>
+              <input type="text" name="cantidad" class="form-control" required>
+            </div>
+            <div class="mb-4">
+              <label for="preciou" class="form-label">Precio unitario</label>
+              <input type="text" name="preciou" class="form-control" required>
+            </div><br>
+            <div class="d-grid">
+              <input type="submit" class="btn btn-primary" value="Ingresar datos">
+          </div>
+          </form>
+        </div>
+      </div>
+    {% endif %}
+{% endblock body %}

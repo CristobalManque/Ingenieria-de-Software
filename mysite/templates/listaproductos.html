@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block item %}
+  {% if g.user['tipo'] == "cliente" %}
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{{ url_for('vista.ingresarproducto') }}"}}>Ingresar producto</a>
+  </li>
+  {% endif %}
+{% endblock %}
+
+{% block item2 %}
+{% if g.user %}
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> {{ g.user['nombre'] }} </a>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+      <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">Cerrar sesión</a></li>
+  </ul>
+</li>
+{% endif %}
+{% endblock item2 %}
+
+{% block body %}
+    {% if g.user %}
+      {% if g.user['tipo'] == "cliente" %}
+      <br>
+      <div class="container">
+        <a href="{{ url_for('vista.inicio') }}" class="btn btn-primary col-sm-1">Volver</a>
+      </div><br>
+      <div class="container">
+        <div class="card text-center mx-auto">
+          <table class="table-active">
+            <thead>
+              <tr>
+                <th scope="col">id</th>
+                <th scope="col">sku</th>
+                <th scope="col">nombre</th>
+                <th scope="col">fecha de entrega</th>
+                <th scope="col">cantidad</th>
+                <th scope="col">precio unitario</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if items|length > 0 %}
+              {% for item in items %}
+              <tr>
+                <td scope="row">{{ item.id }}</td>
+                <td scope="row">{{ item.sku }}</td>
+                <td scope="row">{{ item.nombre }}</td>
+                <td scope="row">{{ item.fechaentrega.replace("T", " ") }}</td>
+                <td scope="row">{{ item.cantidad }}</td>
+                <td scope="row">{{ item.precioU }}</td>
+              </tr>
+              {% endfor %}
+              {% else %}
+              <tr style="text-align: center;">
+                <td colspan="10"> No existen datos</td>
+              </tr>
+              {% endif %}
+            </tbody>
+            </table>
+        </div>
+
+      </div>
+      {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block script %}
+{% endblock %}
