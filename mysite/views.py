@@ -88,6 +88,9 @@ def ingresar():
         return render_template("ingresar.html", items = read_db_row("producto"))
     else:
         return render_template("ingresar.html", items = read_db_row("OCcliente"))
+
+@bp.route('/ingresarproducto', methods=('GET', 'POST'))
+@auth.login_required
 def ingresarproducto():
     if request.method == 'POST':
         sku = request.form['sku']
