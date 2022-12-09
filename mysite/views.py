@@ -21,6 +21,14 @@ def listaproductos():
     if g.user['tipo'] == "cliente":
         return render_template("listaproductos.html", items = db.read_db_row("producto"))
 
+@bp.route('/detalle', methods=['GET'])
+@auth.login_required
+def detalle():
+    if g.user['tipo'] == "cliente":
+        return render_template("detalle.html", items = read_db_col("producto", "sku"))
+    else:
+        return render_template("detalle.html", items = read_db_col("OCcliente", "id"))
+
 @bp.route('/ingresar', methods=('GET', 'POST'))
 @auth.login_required
 def ingresar():
@@ -128,3 +136,7 @@ def ingresarproducto():
 
     return render_template("ingresarproducto.html")
 
+@bp.route('/editar', methods=['GET'])
+@auth.login_required
+def editar():
+    return render_template("editar.html")

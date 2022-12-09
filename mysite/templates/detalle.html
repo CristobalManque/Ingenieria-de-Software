@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block item %}
+<!-- <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{{ url_for('vista.inicio') }}">Inicio</a>
+</li> -->
+{% endblock item %}
+
+{% block item2 %}
+{% if g.user %}
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> {{ g.user['nombre'] }} </a>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+      <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">Cerrar sesión</a></li>
+  </ul>
+</li>
+{% endif %}
+{% endblock item2 %}
+
+{% block body %}
+    <br>
+    <div class="container">
+      <a href="{{ url_for('vista.inicio') }}" class="btn btn-primary col-sm-1">Volver</a>
+      <a href="#" class="btn btn-primary col-sm-1 disabled">Guardar</a>
+    </div><br>
+    <div class="container">
+      <div class="card text-center mx-auto">
+        <h5 style="text-align: center;">Ver detalle</h5>
+    <table class="table-active">
+        <thead>
+        {% if g.user['tipo'] == "cliente" %}
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">sku</th>
+            <th scope="col">nombre</th>
+            <th scope="col">fecha de entrega</th>
+            <th scope="col">cantidad</th>
+            <th scope="col">precio unitario</th>
+            </tr>
+        {% else %}
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">fecha</th>
+            <th scope="col">Tipo de moneda</th>
+            <th scope="col">lugar de entrega</th>
+            <th scope="col">termino de pago</th>
+        </tr>
+        {% endif %}
+        </thead>
+        <tbody>
+        {% if g.user['tipo'] == "cliente" %}
+            {% for item in items %}
+            <tr>
+              <td scope="row">{{ item.id }}</td>
+              <td scope="row">{{ item.sku }}</td>
+              <td scope="row">{{ item.nombre }}</td>
+              <td scope="row">{{ item.fechaentrega.replace("T", " ") }}</td>
+              <td scope="row">{{ item.cantidad }}</td>
+              <td scope="row">{{ item.precioU }}</td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            {% for item in items %}
+            <tr>
+              <td scope="row">{{ item.id }}</td>
+              <td scope="row">{{ item.fecha.replace("T", " ") }}</td>
+              <td scope="row">{{ item.tmoneda }}</td>
+              <td scope="row">{{ item.lugar }}</td>
+              <td scope="row">{{ item.tpago }} días</td>
+            </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+        </table>
+    </div>
+    </div>
+{% endblock body %}
