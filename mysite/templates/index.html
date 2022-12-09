@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
 
+{% block item %}
+  {% if g.user['tipo'] == "cliente" %}
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{{ url_for('vista.ingresarproducto') }}"}}>Ingresar producto</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{{ url_for('vista.listaproductos') }}"}}>Ver productos</a>
+  </li>
+  {% endif %}
+{% endblock %}
+
 {% block item2 %}
 {% if g.user %}
 <li class="nav-item dropdown">
@@ -16,12 +27,40 @@
       {% if g.user['tipo'] == "cliente" %}
       <br>
       <div class="container">
-        <a href="#" class="btn btn-primary col-sm-1">Nuevo</a>
-        <a href="#" class="btn btn-primary col-sm-1 disabled">Editar</a>
+        <a href="{{ url_for('vista.ingresar') }}" class="btn btn-primary col-sm-1">Nuevo</a>
       </div><br>
       <div class="container">
         <div class="card text-center mx-auto">
-          <h5 style="text-align: center;">No hay datos disponibles</h5>
+          <table class="table-active">
+            <thead>
+              <tr>
+                <th scope="col">Acción</th>
+                <th scope="col">id</th>
+                <th scope="col">fecha</th>
+                <th scope="col">Tipo de moneda</th>
+                <th scope="col">lugar de entrega</th>
+                <th scope="col">termino de pago</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if items|length > 0 %}
+              {% for item in items %}
+              <tr>
+                <td scope="row"><a href="{{ url_for('vista.detalle') }}">Ver</a></td>
+                <td scope="row">{{ item.id }}</td>
+                <td scope="row">{{ item.fecha.replace("T", " ") }}</td>
+                <td scope="row">{{ item.tmoneda }}</td>
+                <td scope="row">{{ item.lugar }}</td>
+                <td scope="row">{{ item.tpago }} días</td>
+              </tr>
+              {% endfor %}
+              {% else %}
+              <tr style="text-align: center;">
+                <td colspan="10"> No existen datos</td>
+              </tr>
+              {% endif %}
+            </tbody>
+            </table>
         </div>
 
       </div>
@@ -29,15 +68,46 @@
       {% elif g.user['tipo'] == "proveedor" %}
       <br>
       <div class="container">
-        <a href="#" class="btn btn-primary col-sm-1">Nuevo</a>
-        <a href="#" class="btn btn-primary col-sm-1 disabled">Editar</a>
+        <a href="{{ url_for('vista.ingresar') }}" class="btn btn-primary col-sm-1">Nuevo</a>
       </div><br>
       <div class="container">
         <div class="card text-center mx-auto">
-          <h5 style="text-align: center;">No hay datos disponibles</h5>
+          <table class="table-active">
+            <thead>
+              <tr>
+                <th scope="col">Acción</th>
+                <th scope="col">id</th>
+                <th scope="col">fecha</th>
+                <th scope="col">Tipo de moneda</th>
+                <th scope="col">lugar de entrega</th>
+                <th scope="col">termino de pago</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if items|length > 0 %}
+              {% for item in items %}
+              <tr>
+                <td scope="row"><a href="{{ url_for('vista.detalle') }}">Ver</a></td>
+                <td scope="row">{{ item.id }}</td>
+                <td scope="row">{{ item.fecha.replace("T", " ") }}</td>
+                <td scope="row">{{ item.tmoneda }}</td>
+                <td scope="row">{{ item.lugar }}</td>
+                <td scope="row">{{ item.tpago }} días</td>
+              </tr>
+              {% endfor %}
+              {% else %}
+              <tr style="text-align: center;">
+                <td colspan="10"> No existen datos</td>
+              </tr>
+              {% endif %}
+            </tbody>
+            </table>
         </div>
 
       </div>
       {% endif %}
     {% endif %}
+{% endblock %}
+
+{% block script %}
 {% endblock %}

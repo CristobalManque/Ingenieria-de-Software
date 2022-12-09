@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block item %}
+<!-- <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{{ url_for('vista.inicio') }}">Inicio</a>
+</li> -->
+{% endblock item %}
+
+{% block item2 %}
+{% if g.user %}
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> {{ g.user['nombre'] }} </a>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+      <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">Cerrar sesión</a></li>
+  </ul>
+</li>
+{% endif %}
+{% endblock item2 %}
+
+{% block body %}
+    {% if g.user['tipo'] == "cliente" %}
+      <br>
+      <div class="container">
+        <a href="{{ url_for('vista.inicio') }}" class="btn btn-primary col-sm-1">Volver</a>
+      </div><br>
+      <div class="container">
+        {% if error %}
+        <div class="mb-1">
+          <div class="alert alert-danger" role="alert">
+              <p>{{ error }}</p>
+          </div>
+        </div>
+        {% endif %}
+        <div class="card text-center mx-auto">
+          <h5 style="text-align: center;">Ingresar datos cliente</h5>
+          <form method="post">
+            <div class="mb-4">
+              <label for="sku_p" class="form-label">Seleccione producto</label>
+              <select name="sku_p">
+                {% for item in items %}
+                <option value="{{ item.sku }}">{{ item.sku }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="mb-4">
+              <label for="fecha" class="form-label">Fecha</label>
+              <input type="datetime-local" name="fecha" class="form-control" required>
+            </div>
+            <div class="mb-4">
+              <label for="tmoneda" class="form-label">Tipo de moneda</label>
+              <select name="tmoneda">
+                <option value="clp">CLP (peso chileno)</option>
+                <option value="usd">USD (dolar estadounidense)</option>
+              </select>
+            </div>
+            <div class="mb-4">
+              <label for="lugar" class="form-label">Lugar de entrega</label>
+              <input type="text" name="lugar" class="form-control" required>
+            </div>
+            <div class="mb-4">
+              <label for="tpago" class="form-label">Tipo de moneda</label>
+              <select name="tpago">
+                <option value="30">30 días</option>
+                <option value="60">60 días</option>
+                <option value="90">90 días</option>
+            </div><br>
+            <div class="d-grid">
+              <input type="submit" class="btn btn-primary" value="Ingresar datos">
+          </div>
+          </form>
+        </div>
+      </div>
+    {% elif g.user['tipo'] == "proveedor" %}
+      <br>
+      <div class="container">
+        <a href="{{ url_for('vista.inicio') }}" class="btn btn-primary col-sm-1">Volver</a>
+      </div><br>
+      <div class="container">
+        {% if error %}
+        <div class="mb-1">
+          <div class="alert alert-danger" role="alert">
+              <p>{{ error }}</p>
+          </div>
+        </div>
+        {% endif %}
+        <div class="card text-center mx-auto">
+          <h5 style="text-align: center;">Ingresar datos proveedor</h5>
+          <form method="post">
+            <div class="mb-4">
+              <label for="cliente" class="form-label">Seleccione cliente</label>
+              <select name="cliente">
+                {% for item in items %}
+                <option value="{{ item.id }}">{{ item.id }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="mb-4">
+              <label for="fecha" class="form-label">Fecha</label>
+              <input type="datetime-local" name="fecha" class="form-control" required>
+            </div>
+            <div class="mb-4">
+              <label for="tmoneda" class="form-label">Tipo de moneda</label>
+              <select name="tmoneda">
+                <option value="clp">CLP (peso chileno)</option>
+                <option value="usd">USD (dolar estadounidense)</option>
+              </select>
+            </div>
+            <div class="mb-4">
+              <label for="lugar" class="form-label">Lugar de entrega</label>
+              <input type="text" name="lugar" class="form-control" required>
+            </div>
+            <div class="mb-4">
+              <label for="tpago" class="form-label">Tipo de moneda</label>
+              <select name="tpago">
+                <option value="30">30 días</option>
+                <option value="60">60 días</option>
+                <option value="90">90 días</option>
+            </div><br>
+            <div class="d-grid">
+              <input type="submit" class="btn btn-primary" value="Ingresar datos">
+          </div>
+          </form>
+        </div>
+      </div>
+    {% endif %}
+{% endblock body %}
