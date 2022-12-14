@@ -31,7 +31,6 @@
           <table class="table-active">
             <thead>
               <tr>
-                <th scope="col">id</th>
                 <th scope="col">sku</th>
                 <th scope="col">nombre</th>
                 <th scope="col">fecha de entrega</th>
@@ -43,7 +42,6 @@
               {% if items|length > 0 %}
               {% for item in items %}
               <tr>
-                <td scope="row">{{ item.id }}</td>
                 <td scope="row">{{ item.sku }}</td>
                 <td scope="row">{{ item.nombre }}</td>
                 <td scope="row">{{ item.fechaentrega.replace("T", " ") }}</td>

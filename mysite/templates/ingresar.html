@@ -35,12 +35,15 @@
           <h5 style="text-align: center;">Ingresar datos cliente</h5>
           <form method="post">
             <div class="mb-4">
-              <label for="sku_p" class="form-label">Seleccione producto</label>
-              <select name="sku_p">
+              <label for="opcion" class="form-label">Seleccione producto</label>
+              <select id="opcion">
+                <option value="" selected>Seleccione productos</option>
                 {% for item in items %}
                 <option value="{{ item.sku }}">{{ item.sku }}</option>
                 {% endfor %}
               </select>
+              <input type="text" id="sku_p" name="sku_p" class="campo-texto" disabled>
+              <button id="boton">Des-seleccionar</button>
             </div>
             <div class="mb-4">
               <label for="fecha" class="form-label">Fecha</label>
@@ -87,7 +90,7 @@
           <h5 style="text-align: center;">Ingresar datos proveedor</h5>
           <form method="post">
             <div class="mb-4">
-              <label for="cliente" class="form-label">Seleccione cliente</label>
+              <label for="cliente" class="form-label">Seleccione producto</label>
               <select name="cliente">
                 {% for item in items %}
                 <option value="{{ item.id }}">{{ item.id }}</option>
@@ -124,3 +127,31 @@
       </div>
     {% endif %}
 {% endblock body %}
+
+{% block script %}
+
+<script>
+  // Obtener una referencia al elemento select
+  var select = document.getElementById('opcion');
+
+  select.addEventListener('change', function() {
+    var opSelect = this.value;
+    var campoDeTexto = document.getElementById('sku_p');
+    campoDeTexto.value += opSelect + ' ';
+  });
+
+  // Obtener una referencia al botón
+  var boton = document.getElementById('boton');
+
+  // Agregar un manejador del evento click al botón
+  boton.addEventListener('click', function() {
+    // Des-seleccionar cualquier opción seleccionada
+    select.selectedIndex = 0;
+    var campoDeTexto = document.getElementById('sku_p');
+
+    // Limpiar el contenido del campo de texto
+    campoDeTexto.value = '';
+  });
+</script>
+
+{% endblock script %}

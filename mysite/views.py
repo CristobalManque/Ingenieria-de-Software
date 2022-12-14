@@ -1,5 +1,4 @@
 from flask import (Blueprint, flash, g, redirect, render_template, request, session, url_for)
-from flask_sqlalchemy import SQLAlchemy
 from . import auth
 from . import db
 from mysite.db import read_db_row, read_db_col
@@ -91,6 +90,8 @@ def ingresar():
                 return render_template("ingresar.html", items = read_db_row("producto"), error=error)
             else:
                 return redirect(url_for("vista.inicio"))
+        else:
+            return render_template("ingresar.html", items = read_db_row("producto"), error=error)
 
     if g.user['tipo'] == "cliente":
         return render_template("ingresar.html", items = read_db_row("producto"))
@@ -119,20 +120,34 @@ def ingresarproducto():
         elif not cantidad:
             error = "El cantidad es requerido"
         elif not preciou:
-            error = "El preciou es requerido"
+            error = "El precio unitario es requerido"
 
         if error is None:
-            try:
-                db.execute(
-                    "INSERT INTO producto (sku, nombre, fechaentrega, cantidad, precioU) VALUES (?, ?, ?, ?, ?)",
-                    (sku, nombre, fecha, cantidad, preciou),
-                )
-                db.commit()
-            except:
-                error = "Error"
-                return render_template("ingresarproducto.html", error=error)
-            else:
-                return redirect(url_for("vista.inicio"))
+                try:
+                    sku = int(sku)
+                    cantidad = int(cantidad)
+                    preciou = int(preciou)
+                except ValueError:
+                    error = "Solo puede ingresar números en sku/cantidad/precio unitario"
+                    return render_template("ingresarproducto.html", error=error)
+                
+                if sku < 1 or cantidad < 1 or preciou < 1:
+                    error = 'No puede ingresar datos "negativos" o iguales a cero'
+                    return render_template("ingresarproducto.html", error=error)
+            
+                try:
+                    db.execute(
+                        "INSERT INTO producto (sku, nombre, fechaentrega, cantidad, precioU) VALUES (?, ?, ?, ?, ?)",
+                        (sku, nombre, fecha, cantidad, preciou),
+                    )
+                    db.commit()
+                except db.IntegrityError:
+                    error = "SKU ya se encuentra registrado"
+                    return render_template("ingresarproducto.html", error=error)
+                else:
+                    return redirect(url_for("vista.inicio"))
+        else:
+            return render_template("ingresarproducto.html", error=error)
 
     return render_template("ingresarproducto.html")
 
