@@ -36,6 +36,7 @@
               <tr>
                 <th scope="col">Acción</th>
                 <th scope="col">id</th>
+                <th scope="col">producto(s)</th>
                 <th scope="col">fecha</th>
                 <th scope="col">Tipo de moneda</th>
                 <th scope="col">lugar de entrega</th>
@@ -48,6 +49,7 @@
               <tr>
                 <td scope="row"><a href="{{ url_for('vista.detalle') }}">Ver</a></td>
                 <td scope="row">{{ item.id }}</td>
+                <td scope="row">{{ item.producto }}</td>
                 <td scope="row">{{ item.fecha.replace("T", " ") }}</td>
                 <td scope="row">{{ item.tmoneda }}</td>
                 <td scope="row">{{ item.lugar }}</td>
