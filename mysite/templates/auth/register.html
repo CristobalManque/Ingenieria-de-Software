@@ -11,53 +11,46 @@
 
 {% block body %}
     <div class="container d-flex align-items-center justify-content-center">
-      <div class="row">
-        <h1 class="fw-bold text-center py-5">Formulario de Registro</h1>
-
-        {% if err %}
-          <div class="alert alert-danger" role="alert">
-              <p>{{ err }}</p>
-          </div>
-        {% endif %}
-        
-        <form method="post">
-    
-          <div class="mb-4">
-            <label for="nombre" class="form-label">Nombre y apellido</label>
-            <input type="nombre" class="form-control" name="nombre" required>
-          </div>
-
-          <div class="mb-4">
-            <label for="direccion" class="label">Dirección</label>
-            <input type="direccion" class="form-control" name = "direccion" required>
-
-          </div>
-
-          <div class="mb-4">
-            <label for="telefono" class="form-label">Teléfono</label>
-            <input type="telefono" class="form-control" name ="telefono" required>
-          </div>
-
-          <div class="mb-4">
-            <label for="correo" class="form-label">Correo electrónico</label>
-            <input type="correo" class="form-control" name ="correo" required>
-          </div>
-    
-    
-          <div class="mb-4">
-            <label for="clave" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" name ="clave" required>
-          </div>
-
-          <div class="mb-4">
-          <input type="radio" id="cliente" name="tipo" value="cliente" required>
-          <label for="cliente">Cliente</label><br>
-          <input type="radio" id="proveedor" name="tipo" value="proveedor" required>
-          <label for="proveedor">Proveedor</label><br>
-          </div>
-          
-          <input type="submit" class="btn btn-primary" value="Registrarse">
-        </form>
-      </div>
+        <div class="row">
+            <h2 class="fw-bold text-center py-5">Bienvenido</h2>
+            {% if error %}
+            <div class="mb-1">
+                <div class="alert alert-danger" role="alert">
+                    <p>{{ error }}</p>
+                </div>
+            </div>
+            {% endif %}
+            <form method="post">
+                <div class="mb-4">
+                    <label for="name" class="form-label">Nombre y apellido</label>
+                    <input type="name" name="name" class="form-control" required>
+                </div>
+                <div class="mb-4">
+                  <label for="direccion" class="form-label">Dirección</label>
+                  <input type="direccion" name="direccion" class="form-control" required>
+                </div>
+                <div class="mb-4">
+                  <label for="tel" class="form-label">Teléfono</label>
+                  <input type="tel" name="tel" class="form-control" required>
+                </div>
+                <div class="mb-4">
+                  <label for="mail" class="form-label">Correo electrónico</label>
+                  <input type="mail" name="mail" class="form-control" required>
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" name="password" class="form-control" required>
+                </div>
+                <div class="mb-4">
+                  <input type="radio" id="cliente" name="tipo" value="cliente" required>
+                  <label for="cliente">Cliente</label><br>
+                  <input type="radio" id="proveedor" name="tipo" value="proveedor" required>
+                  <label for="proveedor">Proveedor</label>
+                </div>
+                <div class="d-grid">
+                    <input type="submit" class="btn btn-primary" value="Registrarse">
+                </div>
+            </form>
+        </div>
     </div>
 {% endblock  %}

@@ -42,8 +42,8 @@
                 <option value="{{ item.sku }}">{{ item.sku }}</option>
                 {% endfor %}
               </select>
-              <input type="text" id="sku_p" name="sku_p" class="campo-texto" disabled>
-              <button id="boton">Des-seleccionar</button>
+              <input type="text" id="sku" name="sku" class="campo-texto" required>
+              <button id="boton" type="button">Des-seleccionar</button>
             </div>
             <div class="mb-4">
               <label for="fecha" class="form-label">Fecha</label>
@@ -67,9 +67,9 @@
                 <option value="60">60 días</option>
                 <option value="90">90 días</option>
             </div><br>
-            <div class="d-grid">
+            <div class="mb-4">
               <input type="submit" class="btn btn-primary" value="Ingresar datos">
-          </div>
+            </div>
           </form>
         </div>
       </div>
@@ -135,8 +135,8 @@
   var select = document.getElementById('opcion');
 
   select.addEventListener('change', function() {
-    var opSelect = this.value;
-    var campoDeTexto = document.getElementById('sku_p');
+    var opSelect = (this.value).toString();
+    var campoDeTexto = document.getElementById('sku');
     campoDeTexto.value += opSelect + ' ';
   });
 
@@ -147,7 +147,7 @@
   boton.addEventListener('click', function() {
     // Des-seleccionar cualquier opción seleccionada
     select.selectedIndex = 0;
-    var campoDeTexto = document.getElementById('sku_p');
+    var campoDeTexto = document.getElementById('sku');
 
     // Limpiar el contenido del campo de texto
     campoDeTexto.value = '';

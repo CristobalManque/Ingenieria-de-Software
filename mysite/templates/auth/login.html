@@ -10,30 +10,31 @@
 {% endblock item %}
 
 {% block body %}
+
     <div class="container d-flex align-items-center justify-content-center">
         <div class="row">
             <h2 class="fw-bold text-center py-5">Bienvenido</h2>
-
-            {% if err %}
+            {% if error %}
+            <div class="mb-1">
                 <div class="alert alert-danger" role="alert">
-                    <p>{{ err }}</p>
+                    <p>{{ error }}</p>
                 </div>
+            </div>
             {% endif %}
-
             <form method="post">
                 <div class="mb-4">
-                    <label for="correo" class="form-label">Correo electrónico</label>
-                    <input type="correo" name="correo" class="form-control">
+                    <label for="username" class="form-label">Correo electrónico</label>
+                    <input type="username" name="mail" class="form-control" required>
                 </div>
                 <div class="mb-4">
-                    <label for="clave" class="form-label">Contraseña</label>
-                    <input type="password" name="clave" class="form-control">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" name="password" class="form-control" required>
                 </div>
-                
+                <div class="mb-4"></div>
                 <div class="d-grid">
-                    <input type="submit" class="btn btn-primary" value="Iniciar sesión">
+                    <input type="submit" class="btn btn-primary" value="Iniciar sesion">
                 </div>
             </form>
         </div>
     </div>
-{% endblock %}
+{% endblock  %}

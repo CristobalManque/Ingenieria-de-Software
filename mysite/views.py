@@ -1,8 +1,10 @@
 from flask import (Blueprint, flash, g, redirect, render_template, request, session, url_for)
+from flask_sqlalchemy import SQLAlchemy
 from . import auth
 from . import db
 from mysite.db import read_db_row, read_db_col
 from mysite.db import get_db
+import re
 
 bp = Blueprint('vista', __name__)
 
@@ -33,7 +35,7 @@ def detalle():
 def ingresar():
     if request.method == 'POST':
         if g.user['tipo'] == "cliente":
-            sku_p = request.form['sku_p']
+            sku = request.form['sku']
             fecha = request.form['fecha']
             tmoneda = request.form['tmoneda']
             lugar = request.form['lugar']
@@ -49,7 +51,7 @@ def ingresar():
         error = None
 
         if g.user['tipo'] == "cliente":
-            if not sku_p:
+            if not sku:
                 error = "error en sku"
             elif not fecha:
                 error = "La fecha es requerida"
@@ -76,7 +78,7 @@ def ingresar():
                 if g.user['tipo'] == "cliente":
                     db.execute(
                         "INSERT INTO OCcliente (producto, fecha, tmoneda, lugar, tpago) VALUES (?, ?, ?, ?, ?)",
-                        (sku_p, fecha, tmoneda, lugar, tpago),
+                        (sku, fecha, tmoneda, lugar, tpago),
                     )
                     db.commit()
                 else:
