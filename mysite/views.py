@@ -1,10 +1,8 @@
 from flask import (Blueprint, flash, g, redirect, render_template, request, session, url_for)
-from flask_sqlalchemy import SQLAlchemy
 from . import auth
 from . import db
 from mysite.db import read_db_row, read_db_col
 from mysite.db import get_db
-import re
 
 bp = Blueprint('vista', __name__)
 
