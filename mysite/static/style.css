@@ -1,8 +1,9 @@
 .navbar {
-    background: rgb(2,0,36);
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,70,121,1) 35%, rgba(0,212,255,1) 100%);
+    background: rgb(15,52,96);
+    background: linear-gradient(90deg, rgba(15,52,96,1) 0%, rgba(15,52,96,1) 100%);
 }
 
 body {
-    /** aqui van los colores del body **/
+    background: rgb(118,159,205);
+    background: linear-gradient(90deg, rgba(118,159,205,1) 0%, rgba(185,215,234,1) 25%, rgba(214,230,242,1) 75%, rgba(247,251,252,1) 100%);
 }

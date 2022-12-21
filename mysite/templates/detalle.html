@@ -30,19 +30,19 @@
         <thead>
         {% if g.user['tipo'] == "cliente" %}
           <tr>
-            <th scope="col">sku</th>
-            <th scope="col">nombre</th>
-            <th scope="col">fecha de entrega</th>
-            <th scope="col">cantidad</th>
-            <th scope="col">precio unitario</th>
+            <th scope="col">Sku</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Fecha de entrega</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Precio unitario</th>
             </tr>
         {% else %}
         <tr>
             <th scope="col">id</th>
-            <th scope="col">fecha</th>
+            <th scope="col">Fecha</th>
             <th scope="col">Tipo de moneda</th>
-            <th scope="col">lugar de entrega</th>
-            <th scope="col">termino de pago</th>
+            <th scope="col">Lugar de entrega</th>
+            <th scope="col">Termino de pago</th>
         </tr>
         {% endif %}
         </thead>
