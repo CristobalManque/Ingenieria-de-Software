@@ -1,4 +1,5 @@
 --DROP TABLE IF EXISTS producto;
+--DROP TABLE IF EXISTS usuario;
 DROP TABLE IF EXISTS OCcliente;
 DROP TABLE IF EXISTS OCproveedor;
 

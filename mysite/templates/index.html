@@ -34,7 +34,7 @@
           <table class="table-active">
             <thead>
               <tr>
-                <th scope="col">Acción</th>
+                <!-- <th scope="col">Acción</th> -->
                 <th scope="col">ID</th>
                 <th scope="col">Producto(s)</th>
                 <th scope="col">Fecha de ingreso</th>
@@ -47,7 +47,7 @@
               {% if items|length > 0 %}
               {% for item in items %}
               <tr>
-                <td scope="row"><a href="{{ url_for('vista.detalle') }}">Ver</a></td>
+                <!-- <td scope="row"><a href="{{ url_for('vista.detalle') }}">Ver</a></td> -->
                 <td scope="row">{{ item.id }}</td>
                 <td scope="row">{{ item.producto }}</td>
                 <td scope="row">{{ item.fecha.replace("T", " ") }}</td>
@@ -77,9 +77,9 @@
           <table class="table-active">
             <thead>
               <tr>
-                <th scope="col">Acción</th>
+                <!-- <th scope="col">Acción</th> -->
                 <th scope="col">ID</th>
-                <th scope="col">Fecha</th>
+                <th scope="col">Fecha de ingreso</th>
                 <th scope="col">Tipo de moneda</th>
                 <th scope="col">Lugar de entrega</th>
                 <th scope="col">Termino de pago</th>
@@ -89,7 +89,7 @@
               {% if items|length > 0 %}
               {% for item in items %}
               <tr>
-                <td scope="row"><a href="{{ url_for('vista.detalle') }}">Ver</a></td>
+                <!-- <td scope="row"><a href="{{ url_for('vista.detalle') }}">Ver</a></td> -->
                 <td scope="row">{{ item.id }}</td>
                 <td scope="row">{{ item.fecha.replace("T", " ") }}</td>
                 <td scope="row">{{ item.tmoneda }}</td>
