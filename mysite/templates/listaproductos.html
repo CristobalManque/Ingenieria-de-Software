@@ -2,9 +2,9 @@
 
 {% block item %}
   {% if g.user['tipo'] == "cliente" %}
-  <li class="nav-item">
+  <!-- <li class="nav-item">
     <a class="nav-link active" aria-current="page" href="{{ url_for('vista.ingresarproducto') }}" style="color: white;">Ingresar producto</a>
-  </li>
+  </li> -->
   {% endif %}
 {% endblock %}
 
@@ -24,18 +24,18 @@
       {% if g.user['tipo'] == "cliente" %}
       <br>
       <div class="container">
-        <a href="{{ url_for('vista.inicio') }}" class="btn btn-primary col-sm-1">Volver</a>
+        <a href="{{ url_for('vista.ingresar') }}" class="btn btn-primary col-sm-1">Volver</a>
       </div><br>
       <div class="container">
         <div class="card text-center mx-auto">
           <table class="table-active">
             <thead>
               <tr>
-                <th scope="col">sku</th>
-                <th scope="col">nombre</th>
-                <th scope="col">fecha de entrega</th>
-                <th scope="col">cantidad</th>
-                <th scope="col">precio unitario</th>
+                <th scope="col">SKU</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Fecha de entrega</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Precio unitario</th>
               </tr>
             </thead>
             <tbody>

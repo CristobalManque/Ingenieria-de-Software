@@ -3,6 +3,7 @@ from . import auth
 from . import db
 from mysite.db import read_db_row, read_db_col
 from mysite.db import get_db
+from datetime import datetime
 
 bp = Blueprint('vista', __name__)
 
@@ -34,13 +35,13 @@ def ingresar():
     if request.method == 'POST':
         if g.user['tipo'] == "cliente":
             sku = request.form['sku']
-            fecha = request.form['fecha']
+            fecha = datetime.strftime(datetime.now(), "%d-%m-%Y %H:%M:%S")
             tmoneda = request.form['tmoneda']
             lugar = request.form['lugar']
             tpago = request.form['tpago']
         else:
             cliente = request.form['cliente']
-            fecha = request.form['fecha']
+            fecha = datetime.strftime(datetime.now(), "%d-%m-%Y %H:%M:%S")
             tmoneda = request.form['tmoneda']
             lugar = request.form['lugar']
             tpago = request.form['tpago']
